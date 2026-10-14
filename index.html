@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="description" content="Nader Elsayed is a Data Engineer building reliable data pipelines and analytics-ready data platforms.">
+  <title>Nader Elsayed — Data Engineer</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1220;
+      --surface: #101a2b;
+      --surface-2: #142136;
+      --line: #253249;
+      --text: #edf3f8;
+      --muted: #9aaabd;
+      --teal: #2ed8a7;
+      --blue: #4fa6e8;
+      --max: 1120px;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 87% 3%, #16304a45 0, transparent 30rem),
+        radial-gradient(ellipse at 8% 23%, #0e443b20 0, transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    .wrap { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }
+    .skip-link {
+      position: fixed; z-index: 20; top: 8px; left: 8px;
+      padding: 10px 14px; transform: translateY(-160%);
+      background: var(--teal); color: #07131a; border-radius: 6px;
+    }
+    .skip-link:focus { transform: translateY(0); }
+    .site-header {
+      position: sticky; top: 0; z-index: 10;
+      border-bottom: 1px solid #253249c9;
+      background: #0b1220eF;
+      backdrop-filter: blur(16px);
+    }
+    .header-inner {
+      height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .brand { text-decoration: none; font-size: 14px; font-weight: 750; letter-spacing: -.025em; white-space: nowrap; }
+    .nav { display: flex; align-items: center; gap: 27px; }
+    .nav a {
+      color: var(--muted); text-decoration: none; font-size: 12px; font-weight: 550;
+      transition: color .2s ease;
+    }
+    .nav a:hover, .nav a:focus-visible, .nav a[aria-current="location"] { color: var(--teal); }
+    .nav-cta {
+      padding: 8px 13px; border: 1px solid #2ed8a76b; border-radius: 6px;
+      color: var(--teal) !important;
+    }
+    .menu-toggle {
+      display: none; width: 42px; height: 42px; place-items: center;
+      border: 1px solid var(--line); border-radius: 7px;
+      background: var(--surface); color: var(--text); cursor: pointer;
+    }
+    .menu-toggle svg { width: 19px; height: 19px; }
+
+    .hero {
+      min-height: 600px; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+      align-items: center; gap: 54px; padding-block: 83px 86px;
+    }
+    .eyebrow, .section-kicker {
+      display: flex; align-items: center; gap: 9px;
+      color: var(--teal); font-size: 11px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+    }
+    .pulse {
+      position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--teal);
+      box-shadow: 0 0 0 4px #2ed8a71c;
+    }
+    .hero-name { display: flex; align-items: center; gap: 18px; }
+    .hero-portrait {
+      flex: 0 0 auto; width: 100px; height: 100px; border: 2px solid var(--teal); border-radius: 50%;
+      background: #fff; object-fit: cover; object-position: center 20%;
+    }
+    h1 {
+      max-width: 730px; margin: 20px 0 13px;
+      font-size: clamp(48px, 6.4vw, 76px); line-height: 1.04; letter-spacing: -.065em;
+    }
+    .hero-name h1 { margin: 0; }
+    h1 span { color: var(--teal); }
+    .role { margin: 0; color: #c5d2df; font-size: clamp(15px, 2vw, 19px); font-weight: 550; letter-spacing: -.025em; }
+    .pitch { max-width: 580px; margin: 21px 0 27px; color: var(--muted); font-size: 15px; }
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 11px; }
+    .button {
+      min-height: 45px; display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 0 16px; border: 1px solid var(--line); border-radius: 6px;
+      background: var(--surface); color: var(--text); text-decoration: none; font-size: 12px; font-weight: 700;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); border-color: var(--blue); background: var(--surface-2); }
+    .button-primary { border-color: var(--teal); background: var(--teal); color: #07151a; }
+    .button-primary:hover { border-color: #62e7c0; background: #62e7c0; }
+    .button svg { width: 15px; height: 15px; }
+    .hero-card {
+      position: relative; padding: 20px; overflow: hidden;
+      border: 1px solid var(--line); border-radius: 12px;
+      background: linear-gradient(150deg, #15263a, #101a2a 72%);
+      box-shadow: 0 22px 65px #00000024;
+    }
+    .hero-card::before {
+      position: absolute; content: ""; width: 190px; height: 190px; top: -115px; right: -68px;
+      border: 1px solid #2ed8a72b; border-radius: 50%; box-shadow: 0 0 0 24px #2ed8a70a, 0 0 0 50px #2ed8a707;
+    }
+    .card-label { color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .architecture { position: relative; display: grid; gap: 8px; margin: 21px 0 18px; }
+    .layer {
+      display: grid; grid-template-columns: 32px 1fr auto; align-items: center; gap: 10px;
+      padding: 10px 11px; border: 1px solid #314058; border-radius: 7px; background: #0c1626;
+    }
+    .layer-icon {
+      display: grid; width: 29px; height: 29px; place-items: center; border-radius: 6px;
+      background: #2ed8a716; color: var(--teal); font-size: 13px; font-weight: 800;
+    }
+    .layer:nth-child(2) .layer-icon { background: #4fa6e81a; color: var(--blue); }
+    .layer:nth-child(3) .layer-icon { background: #e5c0671a; color: #e5c067; }
+    .layer strong { display: block; font-size: 12px; line-height: 1.2; }
+    .layer small { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; }
+    .layer-tag { color: #8fa0b4; font-size: 9px; }
+    .flow-arrow { height: 11px; margin-left: 23px; color: #506079; font-size: 12px; line-height: 10px; }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 8px; }
+    .stat {
+      min-height: 69px; padding: 10px; border: 1px solid #253249; border-radius: 7px; background: #111d2e;
+    }
+    .stat strong { display: block; color: var(--teal); font-size: 17px; line-height: 1.2; letter-spacing: -.04em; }
+    .stat span { display: block; margin-top: 4px; color: #9aaabd; font-size: 9px; line-height: 1.4; }
+
+    section.content-section { padding-block: 78px; border-top: 1px solid #253249a8; }
+    .section-heading {
+      display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 27px;
+    }
+    h2 { margin: 7px 0 0; font-size: clamp(30px, 4vw, 42px); line-height: 1.15; letter-spacing: -.055em; }
+    .section-intro { max-width: 410px; margin: 0; color: var(--muted); font-size: 13px; }
+    .about-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 16px; }
+    .panel {
+      border: 1px solid var(--line); border-radius: 9px; background: linear-gradient(145deg, #111c2d, #0f1929);
+    }
+    .about-copy { padding: 24px; }
+    .about-copy p { max-width: 690px; margin: 0; color: #b5c2d0; font-size: 14px; }
+    .about-copy p + p { margin-top: 12px; }
+    .about-side { display: grid; gap: 12px; padding: 18px; }
+    .info-row { display: flex; align-items: center; gap: 12px; }
+    .icon-box {
+      flex: 0 0 auto; width: 36px; height: 36px; display: grid; place-items: center;
+      border: 1px solid #2ed8a72b; border-radius: 7px; background: #2ed8a710; color: var(--teal);
+    }
+    .icon-box svg { width: 17px; height: 17px; }
+    .info-row strong { display: block; font-size: 11px; }
+    .info-row span { display: block; color: var(--muted); font-size: 10px; }
+
+    .timeline { position: relative; display: grid; gap: 14px; margin-left: 10px; }
+    .timeline::before { position: absolute; content: ""; top: 15px; bottom: 20px; left: 8px; width: 1px; background: #314058; }
+    .job { position: relative; padding-left: 34px; }
+    .job-dot {
+      position: absolute; z-index: 1; top: 23px; left: 2px; width: 13px; height: 13px;
+      border: 3px solid var(--bg); border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 1px #2ed8a764;
+    }
+    .job-card { padding: 18px 20px; }
+    .job-top { display: flex; justify-content: space-between; align-items: start; gap: 16px; }
+    .job-title { margin: 0; font-size: 15px; letter-spacing: -.02em; }
+    .job-company { margin: 3px 0 0; color: var(--blue); font-size: 12px; font-weight: 650; }
+    .job-date { flex: 0 0 auto; color: var(--muted); font-size: 10px; }
+    .job-points { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 18px; margin: 13px 0 0; padding: 0; list-style: none; }
+    .job-points li { position: relative; padding-left: 13px; color: #aab8c8; font-size: 11px; line-height: 1.55; }
+    .job-points li::before { position: absolute; top: .58em; left: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--teal); content: ""; }
+    .compact-job { padding-block: 14px; }
+    .compact-job .job-top { align-items: center; }
+    .compact-job .job-title { font-size: 13px; }
+    .compact-job .job-company { display: inline; margin-left: 7px; font-size: 11px; }
+    .early-career { margin: 18px 0 0 44px; padding: 14px 17px; border: 1px dashed #35445a; border-radius: 8px; color: var(--muted); font-size: 11px; }
+    .early-career strong { color: var(--text); }
+
+    .project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
+    .project-card { min-width: 0; padding: 19px; transition: transform .2s ease, border-color .2s ease; }
+    .project-card:hover { transform: translateY(-3px); border-color: #3c536d; }
+    .project-top { display: flex; align-items: start; justify-content: space-between; gap: 15px; }
+    .project-icon {
+      width: 39px; height: 39px; flex: 0 0 auto; display: grid; place-items: center;
+      border: 1px solid #4fa6e832; border-radius: 8px; background: #4fa6e812; color: var(--blue);
+    }
+    .project-icon svg { width: 20px; height: 20px; }
+    .project-type { color: var(--teal); font-size: 9px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+    .project-card h3 { margin: 8px 0 6px; font-size: 15px; line-height: 1.3; letter-spacing: -.025em; }
+    .project-card p { min-height: 42px; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.65; }
+    .diagram {
+      display: flex; align-items: center; gap: 6px; margin-top: 16px; padding: 12px 10px;
+      overflow-x: auto; border: 1px solid #253249; border-radius: 7px; background: #0c1523;
+    }
+    .node {
+      min-width: max-content; padding: 6px 8px; border: 1px solid #34455e; border-radius: 5px;
+      color: #c4d2e1; font-size: 9px; line-height: 1.25; text-align: center;
+    }
+    .node.accent { border-color: #2ed8a760; background: #2ed8a711; color: var(--teal); }
+    .node.blue { border-color: #4fa6e864; background: #4fa6e811; color: var(--blue); }
+    .arrow { flex: 0 0 auto; color: #71839b; font-size: 13px; }
+    .project-notes { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 11px; }
+    .project-notes span { color: #8294a9; font-size: 9px; }
+    .hr-project { grid-column: 1 / -1; }
+    .hr-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; margin-top: 16px; }
+    .hr-gallery figure { min-width: 0; margin: 0; overflow: hidden; border: 1px solid #34455e; border-radius: 6px; background: #f8f7fb; }
+    .hr-gallery img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; }
+    .hr-gallery figcaption { padding: 6px 9px; background: #0c1523; color: #b2bfd0; font-size: 10px; }
+    .excel-toggle { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+    .excel-toggle button {
+      padding: 7px 10px; border: 1px solid #34455e; border-radius: 5px;
+      background: #0c1523; color: #b2bfd0; font-size: 10px; cursor: pointer;
+    }
+    .excel-toggle button[aria-pressed="true"] { border-color: #2ed8a766; background: #2ed8a714; color: var(--teal); }
+    .excel-gallery { margin-top: 9px; }
+    .excel-gallery figure { margin: 0; overflow: hidden; border: 1px solid #34455e; border-radius: 6px; background: #f8f7fb; }
+    .excel-gallery img { display: block; width: 100%; max-height: 480px; aspect-ratio: 16 / 9; object-fit: contain; }
+    .excel-gallery figcaption { padding: 7px 10px; background: #0c1523; color: #b2bfd0; font-size: 10px; }
+    .gallery-project { grid-column: 1 / -1; }
+
+    .review-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .review-card { padding: 19px; }
+    .review-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .review-stars { color: #f59e0b; font-size: 13px; letter-spacing: .12em; }
+    .review-rating, .review-date { color: var(--muted); font-size: 10px; letter-spacing: 0; }
+    .review-card h3 { margin: 11px 0 8px; font-size: 13px; line-height: 1.4; }
+    .review-card blockquote { margin: 0; color: #b5c2d0; font-size: 11px; line-height: 1.7; }
+    .review-card cite { display: block; margin-top: 11px; color: var(--teal); font-size: 9px; font-style: normal; }
+
+    .skill-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .skill-card { padding: 17px; }
+    .skill-card h3 { display: flex; align-items: center; gap: 9px; margin: 0 0 12px; font-size: 12px; }
+    .skill-card h3 .icon-box { width: 29px; height: 29px; border-radius: 6px; }
+    .skill-card h3 .icon-box svg { width: 14px; height: 14px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { padding: 5px 8px; border: 1px solid #2d3b51; border-radius: 5px; color: #b2bfd0; font-size: 9px; line-height: 1.35; }
+    .tag.learning { border-color: #2ed8a755; color: var(--teal); }
+    .education-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 14px; }
+    .education-card { padding: 19px; }
+    .education-card h3 { margin: 0 0 4px; font-size: 13px; }
+    .education-card p { margin: 0; color: var(--muted); font-size: 11px; }
+    .education-meta { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+    .education-meta span { padding: 5px 8px; border-radius: 5px; background: #2ed8a711; color: #74e6c3; font-size: 9px; }
+    .language-list { display: grid; gap: 10px; }
+    .language-row { display: flex; justify-content: space-between; gap: 12px; color: #c3cfdd; font-size: 11px; }
+    .language-row span:last-child { color: var(--muted); }
+    .cert-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .cert-card { padding: 19px; }
+    .cert-featured {
+      grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 20px;
+      border-color: #2ed8a766; background: linear-gradient(125deg, #102a31, #111c2d 70%);
+    }
+    .cert-heading { display: flex; align-items: center; gap: 12px; }
+    .cert-icon {
+      flex: 0 0 auto; width: 42px; height: 42px; display: grid; place-items: center;
+      border: 1px solid #2ed8a766; border-radius: 8px; background: #2ed8a718; color: var(--teal);
+    }
+    .cert-icon svg { width: 21px; height: 21px; }
+    .cert-card h3 { margin: 0; font-size: 14px; line-height: 1.4; }
+    .cert-provider { margin: 5px 0 0; color: var(--muted); font-size: 10px; }
+    .cert-featured h3 { font-size: 17px; }
+    .cert-featured .cert-icon { width: 50px; height: 50px; }
+    .cert-featured .cert-icon svg { width: 25px; height: 25px; }
+    .cert-details { display: grid; gap: 5px; margin-top: 13px; color: var(--muted); font-size: 10px; }
+    .cert-verify { flex: 0 0 auto; }
+
+    .contact-box {
+      display: flex; align-items: center; justify-content: space-between; gap: 28px;
+      padding: 26px; border: 1px solid #2ed8a73d; border-radius: 10px;
+      background: linear-gradient(120deg, #102a31, #111c2d 66%);
+    }
+    .contact-box h2 { font-size: clamp(27px, 4vw, 37px); }
+    .contact-box p { margin: 8px 0 0; color: var(--muted); font-size: 12px; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 9px; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 12px;
+      border: 1px solid #35455a; border-radius: 6px; color: #d3deea; text-decoration: none;
+      font-size: 10px; transition: border-color .2s ease, color .2s ease;
+    }
+    .contact-link:hover { border-color: var(--teal); color: var(--teal); }
+    .contact-link svg { width: 14px; height: 14px; }
+    footer {
+      min-height: 69px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      border-top: 1px solid #253249a8; color: #8393a8; font-size: 10px;
+    }
+    .footer-links { display: flex; gap: 17px; }
+    .footer-links a { text-decoration: none; }
+    .footer-links a:hover { color: var(--teal); }
+    .reveal { opacity: 0; transform: translateY(13px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    @media (max-width: 850px) {
+      .nav { gap: 16px; }
+      .hero { grid-template-columns: minmax(0, 1fr) minmax(270px, .8fr); gap: 27px; }
+      .skill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .contact-box { align-items: start; flex-direction: column; }
+    }
+    @media (max-width: 650px) {
+      html { scroll-padding-top: 75px; }
+      .wrap { width: min(100% - 34px, 520px); }
+      .header-inner { height: 64px; }
+      .menu-toggle { display: grid; }
+      .nav {
+        position: absolute; top: 63px; right: 17px; left: 17px;
+        display: none; align-items: stretch; gap: 0; padding: 8px 14px;
+        border: 1px solid var(--line); border-radius: 8px; background: #101a2b;
+        box-shadow: 0 14px 35px #0007;
+      }
+      .nav.open { display: flex; flex-direction: column; }
+      .nav a { padding: 11px 5px; font-size: 12px; }
+      .nav a + a { border-top: 1px solid #253249; }
+      .nav .nav-cta { margin: 7px 0; padding-inline: 10px; }
+      .hero { min-height: 0; grid-template-columns: 1fr; gap: 29px; padding-block: 62px 53px; }
+      h1 { max-width: 550px; font-size: clamp(46px, 12vw, 64px); }
+      .hero-portrait { width: 76px; height: 76px; }
+      .hero-name { gap: 13px; }
+      .pitch { margin-block: 16px 22px; }
+      .hero-card { max-width: 420px; }
+      section.content-section { padding-block: 57px; }
+      .section-heading { align-items: start; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+      .section-intro { max-width: 100%; }
+      .about-grid, .project-grid, .education-grid, .review-grid { grid-template-columns: 1fr; }
+      .cert-grid { grid-template-columns: 1fr; }
+      .cert-featured { grid-column: auto; align-items: start; flex-direction: column; }
+      .hr-project { grid-column: auto; }
+      .gallery-project { grid-column: auto; }
+      .hr-gallery { grid-template-columns: 1fr; }
+      .about-copy { padding: 19px; }
+      .job { padding-left: 25px; }
+      .timeline { margin-left: 4px; }
+      .job-dot { left: 2px; }
+      .job-card { padding: 15px; }
+      .job-points { grid-template-columns: 1fr; gap: 5px; }
+      .job-top { flex-direction: column; gap: 3px; }
+      .compact-job .job-top { align-items: start; }
+      .compact-job .job-company { display: block; margin: 2px 0 0; }
+      .early-career { margin-left: 29px; }
+      .project-card { padding: 16px; }
+      .project-card p { min-height: 0; }
+      .skill-grid { grid-template-columns: 1fr; }
+      .contact-box { padding: 20px; }
+      footer { align-items: start; flex-direction: column; justify-content: center; padding-block: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#home" aria-label="Nader Elsayed Portfolio, home">Nader Elsayed <span>Portfolio</span></a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <nav class="nav" id="site-nav" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#skills">Skills</a>
+        <a class="nav-cta" href="#contact">Contact <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <section class="hero" id="home" aria-labelledby="hero-title">
+        <div>
+          <div class="eyebrow"><span class="pulse" aria-hidden="true"></span> Data Engineer · Egypt · Open to remote</div>
+          <div class="hero-name">
+            <img class="hero-portrait" src="assets/nader-elsayed.png" alt="Nader Elsayed">
+            <h1 id="hero-title">Nader <span>Elsayed</span></h1>
+          </div>
+          <p class="role">Data Engineer | Microsoft Fabric | Informatica PowerCenter | PySpark | MDM | Data Vault | Medallion Architecture</p>
+          <p class="pitch">I build reliable, production-ready data pipelines, MDM solutions, and analytics-ready data, from raw ingestion to reporting.</p>
+          <div class="actions">
+            <a class="button button-primary" href="nader-elsayed-cv.pdf" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg>
+              Download CV
+            </a>
+            <a class="button" href="#contact">
+              Contact Me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Data engineering architecture and quick facts">
+          <div class="card-label">From raw data to insight</div>
+          <div class="architecture" aria-label="Data flow: sources to Bronze to Silver to Gold to analytics">
+            <div class="layer">
+              <span class="layer-icon" aria-hidden="true">↘</span>
+              <span><strong>Data sources</strong><small>APIs · Files · Databases</small></span>
+              <span class="layer-tag">INGEST</span>
+            </div>
+            <span class="flow-arrow" aria-hidden="true">↓</span>
+            <div class="layer">
+              <span class="layer-icon" aria-hidden="true">B</span>
+              <span><strong>Bronze</strong><small>Raw and traceable</small></span>
+              <span class="layer-tag">LAND</span>
+            </div>
+            <span class="flow-arrow" aria-hidden="true">↓</span>
+            <div class="layer">
+              <span class="layer-icon" aria-hidden="true">S</span>
+              <span><strong>Silver</strong><small>Clean and historized</small></span>
+              <span class="layer-tag">REFINE</span>
+            </div>
+            <span class="flow-arrow" aria-hidden="true">↓</span>
+            <div class="layer">
+              <span class="layer-icon" aria-hidden="true">G</span>
+              <span><strong>Gold</strong><small>Analytics-ready data</small></span>
+              <span class="layer-tag">SERVE</span>
+            </div>
+          </div>
+          <div class="stat-grid">
+            <div class="stat"><strong>2.5+</strong><span>Years of experience</span></div>
+            <div class="stat"><strong>3 sectors</strong><span>Banking · Insurance · Investment</span></div>
+            <div class="stat"><strong>4th</strong><span>In class at university</span></div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="content-section" id="about">
+        <div class="section-heading">
+          <div><div class="section-kicker">01 · About</div><h2>Reliable data. Clear outcomes.</h2></div>
+          <p class="section-intro">I turn complex business needs into trusted data products.</p>
+        </div>
+        <div class="about-grid">
+          <article class="panel about-copy">
+            <p>Data Engineer with 2.5+ years of experience in Banking, Insurance, and Investment. I build end-to-end ETL/ELT pipelines and Medallion Lakehouse architectures with Microsoft Fabric, PySpark, and Informatica.</p>
+            <p>I focus on data quality, reliability, and governance, and build clean data models and Power BI dashboards. I’m growing toward a Senior Data Engineer role and learning Data Governance.</p>
+          </article>
+          <aside class="panel about-side" aria-label="Focus areas">
+            <div class="info-row">
+              <span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg></span>
+              <span><strong>End-to-end pipelines</strong><span>Ingestion through analytics</span></span>
+            </div>
+            <div class="info-row">
+              <span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="m9 12 2 2 4-4"/></svg></span>
+              <span><strong>Quality & governance</strong><span>Traceable, trusted data</span></span>
+            </div>
+            <div class="info-row">
+              <span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5m0 14h17M8 15l3-4 3 2 5-7"/></svg></span>
+              <span><strong>Analytics-ready models</strong><span>Data models and dashboards</span></span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="content-section" id="experience">
+        <div class="section-heading">
+          <div><div class="section-kicker">02 · Experience</div><h2>Building data platforms.</h2></div>
+          <p class="section-intro">Work across data engineering, MDM, and BI.</p>
+        </div>
+        <div class="timeline">
+          <article class="job">
+            <span class="job-dot" aria-hidden="true"></span>
+            <div class="panel job-card">
+              <div class="job-top">
+                <div><h3 class="job-title">Data Engineer</h3><p class="job-company">BBI · Remote</p></div>
+                <span class="job-date">2026 – Present</span>
+              </div>
+              <ul class="job-points">
+                <li>Migrating Azure and on-premise data solutions to Microsoft Fabric.</li>
+                <li>Architected end-to-end Bronze, Silver, and Gold pipelines.</li>
+                <li>Built parallel API ingestion with automated authentication and token refresh.</li>
+                <li>Added data quality checks and SCD Type 2 historization.</li>
+                <li>Implemented audit logging and failure isolation for traceability.</li>
+                <li>Set up real-time monitoring with Fabric Activator, Job Events, and Teams.</li>
+                <li>Worked directly with client stakeholders on requirements.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="job">
+            <span class="job-dot" aria-hidden="true"></span>
+            <div class="panel job-card">
+              <div class="job-top">
+                <div><h3 class="job-title">Data Engineer</h3><p class="job-company">AXA Egypt · via InnoTech Diamond</p></div>
+                <span class="job-date">2025 – 2026</span>
+              </div>
+              <ul class="job-points">
+                <li>Built <strong>Informatica PowerCenter</strong> ETL workflows to load insurance and clinical data into a central warehouse.</li>
+                <li>Designed mappings and workflows to load data from multiple source systems.</li>
+                <li>Modeled Data Vault Hubs, Links, and Satellites with SCD Type 2 policyholder and claims history.</li>
+                <li>Monitored and tuned workflows to improve data availability and reporting reliability.</li>
+                <li>Built Metabase dashboards for claims and policyholder metrics.</li>
+                <li>Delivered work through Dev, UAT, and Prod.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="job">
+            <span class="job-dot" aria-hidden="true"></span>
+            <div class="panel job-card">
+              <div class="job-top">
+                <div><h3 class="job-title">MDM Developer</h3><p class="job-company">Banque Misr · via InnoTech Diamond</p></div>
+                <span class="job-date">2024 – 2025</span>
+              </div>
+              <ul class="job-points">
+                <li>Built a Customer 360 solution that merges customer data from many sources into one Golden Record.</li>
+                <li>Configured Trust, Validation, and Match & Merge rules to find and resolve duplicate customers.</li>
+                <li>Set Survivorship rules to select the most trusted value when sources disagree.</li>
+                <li>Used Informatica MDM and IDQ to improve customer data quality.</li>
+                <li>Gave the bank one consistent view of each customer.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="job">
+            <span class="job-dot" aria-hidden="true"></span>
+            <div class="panel job-card">
+              <div class="job-top">
+                <div><h3 class="job-title">Data Engineer</h3><p class="job-company">InnoTech Diamond</p></div>
+                <span class="job-date">2024 – 2026</span>
+              </div>
+              <ul class="job-points">
+                <li>Delivered data projects for banking and insurance clients, including AXA Egypt and Banque Misr.</li>
+                <li>Built <strong>Informatica PowerCenter</strong> ETL workflows to transform data from multiple sources for a warehouse.</li>
+                <li>Used Informatica MDM and IDQ for master data and data quality work.</li>
+                <li>Monitored and optimized integration jobs so data arrived on time.</li>
+                <li>Turned business requirements into clear technical solutions.</li>
+                <li>Worked with client teams across development, UAT, and production.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="job">
+            <span class="job-dot" aria-hidden="true"></span>
+            <div class="panel job-card">
+              <div class="job-top">
+                <div><h3 class="job-title">BI Consultant</h3><p class="job-company">Campaign Now · Part-time</p></div>
+                <span class="job-date">Texas, USA</span>
+              </div>
+              <ul class="job-points">
+                <li>Cleaned and restructured large survey and voter datasets for reporting.</li>
+                <li>Built Power BI and Looker Studio dashboards with KPI scorecards for leadership.</li>
+                <li>Created a multi-page Looker Studio report with an interactive precinct map and county, district, and party cross-filters.</li>
+                <li>Analyzed survey data to find trends and support better predictions.</li>
+                <li>Tracked client work in Jira.</li>
+                <li>Freelance on Upwork, taking on data engineering and BI projects. <a href="https://www.upwork.com/freelancers/naderbekir" target="_blank" rel="noreferrer" style="display:inline-block;margin:3px 0 0;padding:3px 8px;border:1px solid #2ed8a755;border-radius:5px;color:#2ed8a7;font-size:10px;font-weight:650;text-decoration:none;white-space:nowrap">View my Upwork profile ↗</a></li>
+              </ul>
+            </div>
+          </article>
+        </div>
+        <div class="early-career"><strong>Early career</strong> · Freelance data work on Upwork. Studied SQL, Power BI, and English during completed military service.</div>
+      </section>
+
+      <section class="content-section" id="projects">
+        <div class="section-heading">
+          <div><div class="section-kicker">03 · Featured projects</div><h2>Data in motion.</h2></div>
+          <p class="section-intro">Selected platform, pipeline, and data quality work.</p>
+        </div>
+        <div class="project-grid">
+          <article class="panel project-card reveal">
+            <div class="project-top">
+              <div><span class="project-type">Microsoft Fabric</span><h3>GA4 Medallion Pipeline</h3></div>
+              <span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h6v6H4zM14 13h6v6h-6zM10 8h5a3 3 0 0 1 3 3v2"/></svg></span>
+            </div>
+            <p>Ingests GA4 data from BigQuery via REST API into Bronze, then cleans and historizes it in Silver.</p>
+            <div class="diagram" aria-label="BigQuery via REST API to Bronze to Silver">
+              <span class="node">BigQuery<br>REST API</span><span class="arrow" aria-hidden="true">→</span>
+              <span class="node accent">Bronze</span><span class="arrow" aria-hidden="true">→</span><span class="node blue">Silver</span>
+            </div>
+            <div class="project-notes"><span>ForEach dynamic table list</span><span>·</span><span>PySpark per layer</span><span>·</span><span>Auto token refresh</span><span>·</span><span>Audit & failure isolation</span></div>
+          </article>
+          <article class="panel project-card reveal">
+            <div class="project-top">
+              <div><span class="project-type">Microsoft Fabric</span><h3>Enterprise Data Platform Migration</h3></div>
+              <span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h6v5H4zM14 4h6v5h-6zM14 15h6v5h-6zM10 9.5h2a2 2 0 0 0 2-2M10 10v7.5a2 2 0 0 0 2 2h2"/></svg></span>
+            </div>
+            <p>Brings database, file, and HR API data into a Lakehouse, with clean data returned to downstream destinations.</p>
+            <div class="diagram" aria-label="SQL, file, and HR API sources to Bronze and Silver to CRM, app, and reporting">
+              <span class="node">SQL · Files<br>HR API</span><span class="arrow" aria-hidden="true">→</span>
+              <span class="node accent">Bronze<br>Silver</span><span class="arrow" aria-hidden="true">→</span>
+              <span class="node blue">CRM · App<br>Reports</span>
+            </div>
+            <div class="project-notes"><span>Reverse ETL</span><span>·</span><span>Twice-daily monitoring job</span><span>·</span><span>Email failure reports</span></div>
+          </article>
+          <article class="panel project-card reveal">
+            <div class="project-top">
+              <div><span class="project-type">Informatica MDM</span><h3>Banque Misr MDM</h3></div>
+              <span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0M16 8h5m-2.5-2.5v5"/></svg></span>
+            </div>
+            <p>Creates a trusted customer Golden Record with match, merge, and survivorship rules.</p>
+            <div class="diagram" aria-label="Customer records to match and merge to Golden Record">
+              <span class="node">Customer<br>records</span><span class="arrow" aria-hidden="true">→</span>
+              <span class="node">Match<br>& Merge</span><span class="arrow" aria-hidden="true">→</span>
+              <span class="node accent">Golden<br>Record</span>
+            </div>
+            <div class="project-notes"><span>Trust rules</span><span>·</span><span>Validation</span><span>·</span><span>Survivorship</span></div>
+          </article>
+          <article class="panel project-card reveal">
+            <div class="project-top">
+              <div><span class="project-type">Informatica PowerCenter</span><h3>AXA Data Warehouse</h3></div>
+              <span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg></span>
+            </div>
+            <p>Loads insurance data into a central, historized warehouse using Data Vault models and SCD Type 2.</p>
+            <div class="diagram" aria-label="Insurance data to Data Vault model to analytics warehouse">
+              <span class="node">Insurance<br>data</span><span class="arrow" aria-hidden="true">→</span>
+              <span class="node accent">Hubs · Links<br>Satellites</span><span class="arrow" aria-hidden="true">→</span>
+              <span class="node blue">Historized<br>warehouse</span>
+            </div>
+            <div class="project-notes"><span>Informatica PowerCenter</span><span>·</span><span>SCD Type 2</span></div>
+          </article>
+          <article class="panel project-card reveal hr-project">
+            <div class="project-top">
+              <div><span class="project-type">Power BI</span><h3>HR Analytics Dashboard</h3></div>
+              <span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5m0 14h16M8 15l3-4 3 2 5-7"/></svg></span>
+            </div>
+            <p>Interactive HR reporting for hiring, active employees, turnover, and resignations, with date and workforce filters.</p>
+            <div class="project-notes"><span>Overview</span><span>·</span><span>Hired employees</span><span>·</span><span>Active employees</span><span>·</span><span>Resignation</span></div>
+            <div class="excel-toggle" role="group" aria-label="Choose an HR dashboard view">
+              <button type="button" data-hr-view="overview" aria-controls="hr-dashboard-image" aria-pressed="true">Overview</button>
+              <button type="button" data-hr-view="hired" aria-controls="hr-dashboard-image" aria-pressed="false">Hired Employees</button>
+              <button type="button" data-hr-view="active" aria-controls="hr-dashboard-image" aria-pressed="false">Active Employees</button>
+              <button type="button" data-hr-view="resignation" aria-controls="hr-dashboard-image" aria-pressed="false">Resignation</button>
+            </div>
+            <div class="excel-gallery">
+              <figure>
+                <img id="hr-dashboard-image" src="assets/hr-dashboard/overview.png" alt="HR dashboard overview with hiring, active employee, turnover, and resignation KPIs">
+                <figcaption id="hr-dashboard-caption">HR Overview</figcaption>
+              </figure>
+            </div>
+          </article>
+          <article class="panel project-card reveal hr-project">
+            <div class="project-top">
+              <div><span class="project-type">Excel</span><h3>Sales & Gross Margin Dashboard</h3></div>
+              <span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4zM8 8v8m4-8v8m4-8v8M4 12h16"/></svg></span>
+            </div>
+            <p>Interactive sales analysis with revenue, profit, cost, quantity, and order KPIs, plus regional and channel breakdowns.</p>
+            <div class="project-notes"><span>Revenue analysis</span><span>·</span><span>Gross margin</span><span>·</span><span>Region & channel filters</span></div>
+            <div class="excel-toggle" role="group" aria-label="Choose an Excel dashboard view">
+              <button type="button" data-excel-view="revenue" aria-controls="excel-dashboard-image" aria-pressed="true">Revenue Analysis</button>
+              <button type="button" data-excel-view="margin" aria-controls="excel-dashboard-image" aria-pressed="false">Gross Margin</button>
+            </div>
+            <div class="excel-gallery">
+              <figure>
+                <img id="excel-dashboard-image" src="assets/sales-dashboard/revenue-analysis.png" alt="Excel Revenue Analysis dashboard with revenue, profit, cost, quantity, and order KPIs">
+                <figcaption id="excel-dashboard-caption">Revenue Analysis</figcaption>
+              </figure>
+            </div>
+          </article>
+          <article class="panel project-card reveal gallery-project">
+            <div class="project-top">
+              <div><span class="project-type">Insurance analytics</span><h3>Insured Portfolio & Markets Dashboard</h3></div>
+              <span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 20 7v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7zM8 12h8m-4-4v8"/></svg></span>
+            </div>
+            <p>Insurance portfolio views for revenue, premiums, limits, insureds, carriers, markets, and products.</p>
+            <div class="project-notes"><span>Portfolio overview</span><span>·</span><span>Insured details</span><span>·</span><span>Markets & products</span></div>
+            <div class="excel-toggle" role="group" aria-label="Choose an insured portfolio dashboard view">
+              <button type="button" data-insurance-view="overview" aria-controls="insurance-dashboard-image" aria-pressed="true">Overview</button>
+              <button type="button" data-insurance-view="insureds" aria-controls="insurance-dashboard-image" aria-pressed="false">Insureds</button>
+              <button type="button" data-insurance-view="markets" aria-controls="insurance-dashboard-image" aria-pressed="false">Markets & Products</button>
+            </div>
+            <div class="excel-gallery">
+              <figure>
+                <img id="insurance-dashboard-image" src="assets/insured-dashboard/overview.png" alt="Insurance portfolio overview with revenue, premium, limit, insured, market, and product analytics">
+                <figcaption id="insurance-dashboard-caption">Overview</figcaption>
+              </figure>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section" id="reviews">
+        <div class="section-heading">
+          <div><div class="section-kicker">04 · Client reviews</div><h2>Good work, trusted by clients.</h2></div>
+          <a class="button" href="https://www.upwork.com/freelancers/naderbekir" target="_blank" rel="noreferrer">More on Upwork ↗</a>
+        </div>
+        <div class="review-grid">
+          <article class="panel review-card">
+            <div class="review-meta"><span class="review-stars" aria-label="5 out of 5 stars">★★★★★ <span class="review-rating">5.0</span></span><span class="review-date">Jan 8, 2026</span></div>
+            <h3>Power BI Dashboard Project</h3>
+            <blockquote>“The turnaround time was impressively quick without compromising on quality. Communication was clear, timely, and proactive. The knowledge transfer made it easy for me to maintain and extend the solution.”</blockquote>
+            <cite>Upwork client</cite>
+          </article>
+          <article class="panel review-card">
+            <div class="review-meta"><span class="review-stars" aria-label="5 out of 5 stars">★★★★★ <span class="review-rating">5.0</span></span><span class="review-date">Jan 10 – Feb 11, 2026</span></div>
+            <h3>Phase 3B — Finance KPI Build (Xero → Power BI)</h3>
+            <blockquote>“Strong technical expertise in Power BI, data modelling, and reconciliation against source systems. Nader was responsive and collaborative, and worked through the final items with care.”</blockquote>
+            <cite>Upwork client</cite>
+          </article>
+          <article class="panel review-card">
+            <div class="review-meta"><span class="review-stars" aria-label="5 out of 5 stars">★★★★★ <span class="review-rating">5.0</span></span><span class="review-date">Feb 10 – Mar 31, 2025</span></div>
+            <h3>Survey Data Analysis & Dashboard Building</h3>
+            <blockquote>“A very professional data analyst and visualization expert. He integrated well with our team and built strong visualizations and analytics that wowed our clients.”</blockquote>
+            <cite>Upwork client</cite>
+          </article>
+          <article class="panel review-card">
+            <div class="review-meta"><span class="review-stars" aria-label="5 out of 5 stars">★★★★★ <span class="review-rating">5.0</span></span><span class="review-date">Review · Oct 2, 2025</span></div>
+            <h3>Data Analyst using Looker Studio</h3>
+            <blockquote>“Nader is an excellent data analyst with a strong background in BI & data visualizations. Our clients are always impressed with Nader's visualization products and many end up using these BI tools nearly daily for key planning and decision making.”</blockquote>
+            <cite>Upwork client</cite>
+          </article>
+          <article class="panel review-card">
+            <div class="review-meta"><span class="review-stars" aria-label="5 out of 5 stars">★★★★★ <span class="review-rating">5.0</span></span><span class="review-date">Dec 27 – 29, 2024</span></div>
+            <h3>Python EDA Expert</h3>
+            <blockquote>“Extremely efficient and motivated. His expertise was at a very high level, and he knows how to work with machine learning and data processing.”</blockquote>
+            <cite>Upwork client</cite>
+          </article>
+          <article class="panel review-card">
+            <div class="review-meta"><span class="review-stars" aria-label="5 out of 5 stars">★★★★★ <span class="review-rating">5.0</span></span><span class="review-date">Jan 3 – 5, 2025</span></div>
+            <h3>Statistical Data Analysis</h3>
+            <blockquote>“Exceptional quality. Nader is a genuine subject matter expert in data analysis, processing, and machine learning. I look forward to collaborating with him on future projects.”</blockquote>
+            <cite>Upwork client</cite>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section" id="skills">
+        <div class="section-heading">
+          <div><div class="section-kicker">05 · Skills</div><h2>Tools & strengths.</h2></div>
+          <p class="section-intro">A practical toolkit for trusted data and useful analytics.</p>
+        </div>
+        <div class="skill-grid">
+          <article class="panel skill-card">
+            <h3><span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m12 3 8 5-8 5-8-5 8-5ZM4 12l8 5 8-5M4 16l8 5 8-5"/></svg></span>Platforms</h3>
+            <div class="tags"><span class="tag">Microsoft Fabric</span><span class="tag">Informatica PowerCenter</span><span class="tag">Informatica IICS</span></div>
+          </article>
+          <article class="panel skill-card">
+            <h3><span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m8 8-4 4 4 4m8-8 4 4-4 4m-3-11-2 14"/></svg></span>Processing</h3>
+            <div class="tags"><span class="tag">PySpark</span><span class="tag">Apache Spark</span><span class="tag">SQL (T-SQL / PL-SQL)</span></div>
+          </article>
+          <article class="panel skill-card">
+            <h3><span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg></span>Architecture & modeling</h3>
+            <div class="tags"><span class="tag">Medallion Architecture</span><span class="tag">Data Vault</span><span class="tag">SCD Type 2</span><span class="tag">Data Warehousing</span><span class="tag">ETL/ELT Pipeline Design</span></div>
+          </article>
+          <article class="panel skill-card">
+            <h3><span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m12 3 8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7zM9 12l2 2 4-4"/></svg></span>Quality & governance</h3>
+            <div class="tags"><span class="tag">Data Quality</span><span class="tag">MDM</span><span class="tag">Audit Logging</span><span class="tag learning">Data Governance · Learning</span></div>
+          </article>
+          <article class="panel skill-card">
+            <h3><span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19V5m0 14h16M8 15l3-4 3 2 5-7"/></svg></span>BI</h3>
+            <div class="tags"><span class="tag">Power BI</span><span class="tag">Looker Studio</span><span class="tag">Metabase</span><span class="tag">Dashboard Design</span><span class="tag">Advanced Excel</span></div>
+          </article>
+          <article class="panel skill-card">
+            <h3><span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M16 20v-1.5a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4V20m3-11a4 4 0 1 0 8 0M16 4.5a4 4 0 0 1 0 7.5m2 3h.5a4 4 0 0 1 4 4V20"/></svg></span>Ways of working</h3>
+            <div class="tags"><span class="tag">Stakeholder communication</span><span class="tag">Requirements gathering</span><span class="tag">Problem solving</span><span class="tag">Cross-team collaboration</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section" id="education">
+        <div class="section-heading">
+          <div><div class="section-kicker">06 · Education & languages</div><h2>Learning by building.</h2></div>
+        </div>
+        <div class="education-grid">
+          <article class="panel education-card">
+            <h3>BSc, Computers and Information Sciences</h3>
+            <p>Information Systems · Mansoura University · 2018–2022</p>
+            <div class="education-meta"><span>4th in class</span><span>Graduation project: Excellent</span></div>
+            <p style="margin-top:12px">Project: Information System for Exercising based on Deep Learning.</p>
+          </article>
+          <article class="panel education-card">
+            <h3 style="margin-bottom:13px">Languages</h3>
+            <div class="language-list">
+              <div class="language-row"><span>Arabic</span><span>Native</span></div>
+              <div class="language-row"><span>English</span><span>Professional working level</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section" id="certifications">
+        <div class="section-heading">
+          <div><div class="section-kicker">07 · Certifications</div><h2>Credentials & learning.</h2></div>
+        </div>
+        <div class="cert-grid">
+          <article class="panel cert-card cert-featured">
+            <div>
+              <div class="cert-heading">
+                <span class="cert-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="m8.5 12-1 9 4.5-2.5 4.5 2.5-1-9"/></svg></span>
+                <span><h3>Microsoft Certified: Fabric Data Engineer Associate</h3><p class="cert-provider">Provider: Microsoft</p></span>
+              </div>
+            </div>
+            <a class="button button-primary cert-verify" href="https://learn.microsoft.com/en-us/users/naderelsayedbekir-8594/credentials/321a9884d9678e60" target="_blank" rel="noreferrer">
+              Verify credential
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
+          </article>
+          <article class="panel cert-card">
+            <div class="cert-heading">
+              <span class="cert-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="m8.5 12-1 9 4.5-2.5 4.5 2.5-1-9"/></svg></span>
+              <span><h3>Artificial Intelligence Analyst 2021 - Mastery Award</h3><p class="cert-provider">Provider: IBM</p></span>
+            </div>
+            <div class="cert-details">
+              <span>Issued August 2021</span>
+              <a class="button" href="https://www.credly.com/badges/0b74661c-46bd-4667-b604-ab7f5ffc96b2?source=linked_in_profile" target="_blank" rel="noreferrer">View Credly badge ↗</a>
+            </div>
+          </article>
+          <article class="panel cert-card">
+            <div class="cert-heading">
+              <span class="cert-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="m8.5 12-1 9 4.5-2.5 4.5 2.5-1-9"/></svg></span>
+              <span><h3>Huawei Certification: AI</h3><p class="cert-provider">Provider: Huawei</p></span>
+            </div>
+            <div class="cert-details"><span>Issued August 2020</span><span>Valid through August 26, 2023</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section" id="contact">
+        <div class="contact-box">
+          <div>
+            <div class="section-kicker">08 · Contact</div>
+            <h2>Let’s build reliable data.</h2>
+            <p>Based in Egypt. Open to remote work.</p>
+          </div>
+          <div class="contact-links">
+            <a class="contact-link" href="mailto:Nader.bekir111@gmail.com" aria-label="Email Nader Elsayed">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email me
+            </a>
+            <a class="contact-link" href="https://linkedin.com/in/nader-bekir" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9v10M5 5v.01M9 19v-6a4 4 0 0 1 8 0v6m-8-6v6"/></svg>LinkedIn ↗
+            </a>
+            <a class="contact-link" href="https://github.com/Naderbekir88" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 6v-3.9a3.4 3.4 0 0 0-.9-2.7c3-.3 6.1-1.5 6.1-6.7a5.2 5.2 0 0 0-1.4-3.6 4.8 4.8 0 0 0-.1-3.6s-1.2-.4-3.8 1.4a13 13 0 0 0-6.9 0C5.4 1.1 4.2 1.5 4.2 1.5a4.8 4.8 0 0 0-.1 3.6 5.2 5.2 0 0 0-1.4 3.6c0 5.2 3.1 6.4 6.1 6.7a3.4 3.4 0 0 0-.9 2.7V22"/></svg>GitHub ↗
+            </a>
+            <a class="contact-link" href="https://www.upwork.com/freelancers/naderbekir" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="12" r="3"/><circle cx="17" cy="12" r="3"/><path d="M10 12h4M7 9V6m10 9v3"/></svg>Hire me on Upwork ↗
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <span>© 2026 Nader Elsayed</span>
+        <div class="footer-links">
+          <a href="mailto:Nader.bekir111@gmail.com">Email</a>
+          <a href="https://linkedin.com/in/nader-bekir" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="https://github.com/Naderbekir88" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    const menuButton = document.querySelector(".menu-toggle");
+    const nav = document.querySelector("#site-nav");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+      menuButton.setAttribute("aria-expanded", String(!isOpen));
+      menuButton.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+      nav.classList.toggle("open", !isOpen);
+    });
+
+    nav.addEventListener("click", (event) => {
+      if (event.target instanceof HTMLAnchorElement) {
+        nav.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.setAttribute("aria-label", "Open navigation");
+      }
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+
+    const excelDashboardViews = {
+      revenue: {
+        src: "assets/sales-dashboard/revenue-analysis.png",
+        alt: "Excel Revenue Analysis dashboard with revenue, profit, cost, quantity, and order KPIs",
+        caption: "Revenue Analysis"
+      },
+      margin: {
+        src: "assets/sales-dashboard/gross-margin.png",
+        alt: "Excel Gross Margin dashboard with revenue, gross margin, cost, and product profit charts",
+        caption: "Gross Margin Dashboard"
+      }
+    };
+
+    document.querySelectorAll("[data-excel-view]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const view = excelDashboardViews[button.dataset.excelView];
+        if (!view) return;
+        const image = document.querySelector("#excel-dashboard-image");
+        const caption = document.querySelector("#excel-dashboard-caption");
+        image.src = view.src;
+        image.alt = view.alt;
+        caption.textContent = view.caption;
+        document.querySelectorAll("[data-excel-view]").forEach((toggle) => {
+          toggle.setAttribute("aria-pressed", String(toggle === button));
+        });
+      });
+    });
+
+    const hrDashboardViews = {
+      overview: {
+        src: "assets/hr-dashboard/overview.png",
+        alt: "HR dashboard overview with hiring, active employee, turnover, and resignation KPIs",
+        caption: "HR Overview"
+      },
+      hired: {
+        src: "assets/hr-dashboard/hired.png",
+        alt: "Hired employees dashboard with employee trends, education, managers, and departments",
+        caption: "Hired Employees"
+      },
+      active: {
+        src: "assets/hr-dashboard/active-employees.png",
+        alt: "Active employees dashboard with employee trends and department breakdown",
+        caption: "Active Employees"
+      },
+      resignation: {
+        src: "assets/hr-dashboard/resignation.png",
+        alt: "Resignation dashboard with trends and resignation reasons",
+        caption: "Resignation"
+      }
+    };
+
+    document.querySelectorAll("[data-hr-view]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const view = hrDashboardViews[button.dataset.hrView];
+        if (!view) return;
+        const image = document.querySelector("#hr-dashboard-image");
+        const caption = document.querySelector("#hr-dashboard-caption");
+        image.src = view.src;
+        image.alt = view.alt;
+        caption.textContent = view.caption;
+        document.querySelectorAll("[data-hr-view]").forEach((toggle) => {
+          toggle.setAttribute("aria-pressed", String(toggle === button));
+        });
+      });
+    });
+
+    const insuranceDashboardViews = {
+      overview: {
+        src: "assets/insured-dashboard/overview.png",
+        alt: "Insurance portfolio overview with revenue, premium, limit, insured, market, and product analytics",
+        caption: "Overview"
+      },
+      insureds: {
+        src: "assets/insured-dashboard/insureds.png",
+        alt: "Insureds dashboard with revenue, premium, limit, insured details, and product charts",
+        caption: "Insureds"
+      },
+      markets: {
+        src: "assets/insured-dashboard/markets.png",
+        alt: "Markets and products dashboard with commission, premium, limit, and insured details",
+        caption: "Markets & Products"
+      }
+    };
+
+    document.querySelectorAll("[data-insurance-view]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const view = insuranceDashboardViews[button.dataset.insuranceView];
+        if (!view) return;
+        const image = document.querySelector("#insurance-dashboard-image");
+        const caption = document.querySelector("#insurance-dashboard-caption");
+        image.src = view.src;
+        image.alt = view.alt;
+        caption.textContent = view.caption;
+        document.querySelectorAll("[data-insurance-view]").forEach((toggle) => {
+          toggle.setAttribute("aria-pressed", String(toggle === button));
+        });
+      });
+    });
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll(".nav a").forEach((link) => {
+            if (link.getAttribute("href") === `#${entry.target.id}`) {
+              link.setAttribute("aria-current", "location");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          });
+        }
+      });
+    }, { rootMargin: "-35% 0px -55% 0px" });
+    document.querySelectorAll("main section[id]").forEach((section) => sectionObserver.observe(section));
+  </script>
+</body>
+</html>
